@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import { APP_ROUTES } from './app.routes';
 import { BASE_URL } from "app/app.tokens";
+import { FlightService } from "app/flight-booking/flight.service";
 
 @NgModule({
   imports: [
@@ -20,7 +21,7 @@ import { BASE_URL } from "app/app.tokens";
     HomeComponent
   ],
   providers: [
-    {provide: BASE_URL, useValue: 'http://www.angular.at/api'}
+    {provide: BASE_URL, useValue: 'http://www.angular.at/api'},
   ],
   bootstrap: [AppComponent]
 })
