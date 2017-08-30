@@ -1,0 +1,41 @@
+<h1>Flight Search</h1>
+<div class="row card">
+
+  <form #form="ngForm" roundTrip>
+
+    <div *ngIf="form?.hasError('roundTrip')">roundTrip</div>
+
+  <div class="form-group">
+    <label>From:</label>
+    <input
+      class="form-control"
+      [(ngModel)]="from"
+      name="from">
+
+  </div>
+  <div class="form-group">
+    <label>To:</label>
+    <input name="to" class="form-control" [(ngModel)]="to">
+  </div>
+  <div class="form-group">
+    <button class="btn btn-default" [disabled]="!form?.valid" (click)="search()">Search</button>
+  </div>
+  </form>
+</div>
+
+<div class="row card" *ngIf="flights.length > 0">
+  <table class="table table-condensed">
+    <tr *ngFor="let f of flights" [ngClass]="{ 'active': f === selectedFlight }">
+      <td>{{f.id}}</td>
+      <td>{{f.from }}</td>
+      <td>{{f.to }}</td>
+      <td>{{f.date | date:'dd.MM.yyyy HH:mm' }}</td>
+      <td><a (click)="select(f)">Select</a></td>
+    </tr>
+  </table>
+</div>
+
+<div class="row card">
+  <pre>{{ selectedFlight | json }}</pre>
+</div>
+
