@@ -4,12 +4,13 @@ import { Http, Headers, URLSearchParams } from '@angular/http';
 import { HttpClient } from "@angular/common/http";
 import { HttpHeaders } from "@angular/common/http";
 import { HttpParams } from "@angular/common/http";
+import { FlightService } from "app/flight-booking/flight.service";
 
 @Component({
   selector: 'flight-search',
   templateUrl: './flight-search.component.html',
   styleUrls: ['./flight-search.component.css'],
-  providers: []
+  providers: [FlightService]
 })
 export class FlightSearchComponent {
 
@@ -19,7 +20,7 @@ export class FlightSearchComponent {
   selectedFlight: Flight;
 
   
-  constructor(private http: HttpClient) {
+  constructor(private flightService: FlightService) {
   }
   
   /*
@@ -33,27 +34,16 @@ export class FlightSearchComponent {
   search(): void {
     if (!this.from || !this.to) return;
 
-    let url = 'http://www.angular.at/api/flight';
-
-    let params = new HttpParams()
-                        .set('from', this.from)
-                        .set('to', this.to);
-
-    let headers = new HttpHeaders()
-                        .set('Accept', 'application/json');
-
-
-
-    this.http
-        .get<Flight[]>(url, { params, headers })
-        .subscribe(
-          flights => {
-            this.flights = flights;
-          },
-          err => {
-            console.error('Fehler beim Laden', err);
-          }
-        );
+      this.flightService
+          .search(this.from, this.to)
+          .subscribe(
+            flights => {
+              this.flights = flights;
+            },
+            err => {
+              console.error('Fehler beim Laden', err);
+            }
+          );
   }
 
   select(f: Flight): void {

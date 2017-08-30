@@ -5,6 +5,7 @@ import { FlightSearchComponent } from './flight-search/flight-search.component';
 import { PassengerSearchComponent } from './passenger-search/passenger-search.component';
 import { RouterModule } from '@angular/router';
 import { FLIGHT_BOOKING_ROUTES } from './flight-booking.routes';
+import { FlightService } from "app/flight-booking/flight.service";
 
 @NgModule({
   imports: [
@@ -17,6 +18,8 @@ import { FLIGHT_BOOKING_ROUTES } from './flight-booking.routes';
     PassengerSearchComponent,
   ],
   providers:[
+    // FlightService
+    // { provide: FlightService, useClass: FlightService }
   ],
   exports: [
     FlightSearchComponent
