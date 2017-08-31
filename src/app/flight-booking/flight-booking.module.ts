@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { FlightLookaheadComponent } from './flight-lookahead/flight-lookahead.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,7 +15,9 @@ import { FlightCardComponent } from './flight-card/flight-card.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forChild(FLIGHT_BOOKING_ROUTES)
+    RouterModule.forChild(FLIGHT_BOOKING_ROUTES),
+
+    TranslateModule.forChild()
   ],
   declarations: [
     FlightSearchComponent,
