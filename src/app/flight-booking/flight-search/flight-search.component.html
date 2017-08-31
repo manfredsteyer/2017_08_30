@@ -23,11 +23,18 @@
   </form>
 </div>
 
+<a (click)="toggleClosed()">Toggle</a>
+<div class="basket" *ngIf="!closed">
+  
+  <basket></basket>
+</div>
+
 <div class="row">
 <div *ngFor="let f of flights" class="col col-lg-3 col-md-4 col-sm-6">
   <flight-card 
     [item]="f" 
-    [(selected)]="basket[f.id]">
+    [selected]="basket[f.id]"
+    (selectedChange)="select(f, $event)">
   </flight-card>
 </div>
 </div>

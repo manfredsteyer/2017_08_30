@@ -1,3 +1,4 @@
+import { FlightEventService } from '../flight-event.service';
 import { Component, OnInit } from '@angular/core';
 import { Flight } from '../../entities/flight';
 import { Http, Headers, URLSearchParams } from '@angular/http';
@@ -19,12 +20,20 @@ export class FlightSearchComponent {
   flights: Array<Flight> = [];
   selectedFlight: Flight;
 
+  closed: boolean = false;
+
   basket: object = {
     "3": true,
     "5": true
   }
   
-  constructor(private flightService: FlightService) {
+  constructor(
+    private flightEventService: FlightEventService,
+    private flightService: FlightService) {
+  }
+
+  toggleClosed() {
+    this.closed = !this.closed;
   }
   
   /*
@@ -51,7 +60,10 @@ export class FlightSearchComponent {
     
   }
 
-  select(f: Flight): void {
-    this.selectedFlight = f;
+  select(f: Flight, selected: boolean): void {
+    this.basket[f.id] = selected;
+    if (selected) {
+      this.flightEventService.flightSelected.next(f);
+    }
   }
 }
