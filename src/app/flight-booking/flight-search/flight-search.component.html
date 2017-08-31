@@ -23,14 +23,13 @@
   </form>
 </div>
 
-<a (click)="toggleClosed()">Toggle</a>
-<div class="basket" *ngIf="!closed">
-  
-  <basket></basket>
+
+<div class="card">
+  <pre>{{statistics$ | async | json}}</pre>
 </div>
 
 <div class="row">
-<div *ngFor="let f of flights" class="col col-lg-3 col-md-4 col-sm-6">
+<div *ngFor="let f of flights$ | async" class="col col-lg-3 col-md-4 col-sm-6">
   <flight-card 
     [item]="f" 
     [selected]="basket[f.id]"

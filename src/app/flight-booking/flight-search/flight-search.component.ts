@@ -1,4 +1,8 @@
-import { FlightEventService } from '../flight-event.service';
+import { AppState } from '../../model/app.state';
+import { Store } from '@ngrx/store';
+import { FlightsStatistics } from '../../model/flights/flights.state';
+import { Observable } from 'rxjs/Rx';
+import { FlightEventService } from '../../flight-event.service';
 import { Component, OnInit } from '@angular/core';
 import { Flight } from '../../entities/flight';
 import { Http, Headers, URLSearchParams } from '@angular/http';
@@ -13,7 +17,7 @@ import { FlightService } from "app/flight-booking/flight.service";
   styleUrls: ['./flight-search.component.css'],
   providers: [FlightService]
 })
-export class FlightSearchComponent {
+export class FlightSearchComponent implements OnInit {
 
   from: string = 'Hamburg';
   to: string = 'Graz';
@@ -26,11 +30,21 @@ export class FlightSearchComponent {
     "3": true,
     "5": true
   }
-  
+
+  flights$: Observable<Flight[]>;
+  statistics$: Observable<FlightsStatistics>;
+
   constructor(
+    private store: Store<AppState>,
     private flightEventService: FlightEventService,
     private flightService: FlightService) {
   }
+
+  ngOnInit() {
+    this.flights$ = this.store.select(s => s.flights.flights);
+    this.statistics$ = this.store.select(s => s.flights.statistics);
+  }
+
 
   toggleClosed() {
     this.closed = !this.closed;
@@ -48,22 +62,12 @@ export class FlightSearchComponent {
     if (!this.from || !this.to) return;
 
       let observable = 
-        this.flightService.search(this.from, this.to).subscribe(
-            flights => {
-              this.flights = flights;
-            },
-            err => {
-              console.error('Fehler beim Laden', err);
-            }
-          );
-
-    
+        this.flightService.search(this.from, this.to);
+   
   }
 
   select(f: Flight, selected: boolean): void {
     this.basket[f.id] = selected;
-    if (selected) {
-      this.flightEventService.flightSelected.next(f);
-    }
+    this.flightEventService.flightSelected.next(f);
   }
 }

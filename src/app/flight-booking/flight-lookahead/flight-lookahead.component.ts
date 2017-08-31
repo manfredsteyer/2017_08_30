@@ -37,7 +37,7 @@ export class FlightLookaheadComponent implements OnInit {
     ngOnInit() { 
         this.control = new FormControl();
 
-        this.flights$ = this
+        this.flights$ = <any>this
                             .control
                             .valueChanges
                             .debounceTime(300)

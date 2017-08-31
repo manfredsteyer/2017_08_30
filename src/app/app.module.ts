@@ -1,3 +1,9 @@
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { initAppState } from './model/app.state';
+import { appReducer } from './model/app.reducer';
+import { StoreModule } from '@ngrx/store';
+import { FlightEventService } from './flight-event.service';
+import { BasketComponent } from './basket/basket.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,13 +20,19 @@ import { FlightService } from "app/flight-booking/flight.service";
     BrowserModule,
     HttpClientModule,
     FlightBookingModule,
-    RouterModule.forRoot(APP_ROUTES)
+    RouterModule.forRoot(APP_ROUTES),
+    StoreModule.forRoot(appReducer, { initialState: initAppState}),
+    StoreDevtoolsModule.instrument()
+    
   ],
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    BasketComponent,
+    
   ],
   providers: [
+    FlightEventService,
     {provide: BASE_URL, useValue: 'http://www.angular.at/api'},
   ],
   bootstrap: [AppComponent]

@@ -1,13 +1,17 @@
+
 <div class="gray-bg"></div>
 
 <div class="flight-history">
 
+    <h1>Your Basket</h1>
   <div class="flight-history-inside card">
 
-    <h2>Your Basket [<a (click)="close()">x</a>]</h2>
+    
 
     <ul class="list-group" *ngIf="!closed">
-
+      <li *ngIf="flights.length === 0" class="list-group-item">
+        Your basket is empty.
+      </li>
       <li *ngFor="let f of flights" class="list-group-item">
         <p>{{ f.id }}, {{f.from}} - {{f.to}}</p>
       </li>

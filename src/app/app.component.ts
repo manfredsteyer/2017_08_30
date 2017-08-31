@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  showBasket = true;
+  toggleBasket() {
+    this.showBasket = !this.showBasket;
+  }
 }
 

@@ -9,13 +9,21 @@
     <li><a routerLink="/flight-search">Flight Search</a></li>
     <li><a routerLink="/passenger-search">Passenger Search</a></li>
     <li><a routerLink="/flight-lookahead">Flight Lookahead</a></li>
+    <li><a (click)="toggleBasket()">Basket</a></li>
   </ul>
 </nav>
 
 <div class="container">
 
 
-  <router-outlet></router-outlet>
+  <div class="col-md-9">
+    <router-outlet></router-outlet>
+  </div>
+
+  <div class="col-md-3" *ngIf="showBasket">
+    
+    <basket></basket>
+  </div>
 
 </div>
 

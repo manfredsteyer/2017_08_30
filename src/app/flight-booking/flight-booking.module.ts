@@ -1,5 +1,3 @@
-import { BasketComponent } from './basket/basket.component';
-import { FlightEventService } from './flight-event.service';
 import { FlightLookaheadComponent } from './flight-lookahead/flight-lookahead.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -23,10 +21,8 @@ import { FlightCardComponent } from './flight-card/flight-card.component';
     PassengerSearchComponent,
     FlightCardComponent,
     FlightLookaheadComponent,
-    BasketComponent
 ],
   providers:[
-    FlightEventService
     // FlightService
     // { provide: FlightService, useClass: FlightService }
   ],

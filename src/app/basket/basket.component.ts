@@ -1,4 +1,4 @@
-import { Flight } from '../../entities/flight';
+import { Flight } from '../entities/flight';
 import { FlightEventService } from '../flight-event.service';
 import { Component } from '@angular/core';
 import { Router } from "@angular/router";
