@@ -38,9 +38,8 @@ export class FlightSearchComponent {
   search(): void {
     if (!this.from || !this.to) return;
 
-      this.flightService
-          .search(this.from, this.to)
-          .subscribe(
+      let observable = 
+        this.flightService.search(this.from, this.to).subscribe(
             flights => {
               this.flights = flights;
             },
@@ -48,6 +47,8 @@ export class FlightSearchComponent {
               console.error('Fehler beim Laden', err);
             }
           );
+
+    
   }
 
   select(f: Flight): void {

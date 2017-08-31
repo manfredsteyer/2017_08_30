@@ -1,6 +1,7 @@
+import { FlightLookaheadComponent } from './flight-lookahead/flight-lookahead.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlightSearchComponent } from './flight-search/flight-search.component';
 import { PassengerSearchComponent } from './passenger-search/passenger-search.component';
 import { RouterModule } from '@angular/router';
@@ -12,12 +13,14 @@ import { FlightCardComponent } from './flight-card/flight-card.component';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(FLIGHT_BOOKING_ROUTES)
   ],
   declarations: [
     FlightSearchComponent,
     PassengerSearchComponent,
-    FlightCardComponent
+    FlightCardComponent,
+    FlightLookaheadComponent
 ],
   providers:[
     // FlightService
