@@ -37,7 +37,7 @@ export function createLoader(http: HttpClient) {
       loader: {
         provide: TranslateLoader,
         useFactory: createLoader,
-        deps: [Http]
+        deps: [HttpClient]
       }
     }),
 
