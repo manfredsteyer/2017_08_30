@@ -1,3 +1,5 @@
+import { FlightsEffects } from './model/flights.effects';
+import { EffectsModule } from '@ngrx/effects';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Http } from '@angular/http';
@@ -31,6 +33,7 @@ export function createLoader(http: HttpClient) {
     RouterModule.forRoot(APP_ROUTES),
     
     StoreModule.forRoot(appReducer, { initialState: initAppState}),
+    EffectsModule.forRoot([FlightsEffects]),
     StoreDevtoolsModule.instrument(),
     
     TranslateModule.forRoot({

@@ -19,7 +19,7 @@ export class FlightService {
         private http: HttpClient) { 
     }
 
-    search(from: string, to: string): void {
+    search(from: string, to: string): Observable<Flight[]> {
         
         let url = this.baseUrl + '/flight';
         
@@ -30,14 +30,7 @@ export class FlightService {
         let headers = new HttpHeaders()
                             .set('Accept', 'application/json');
     
-        this.http.get<Flight[]>(url, { params, headers }).subscribe(
-            flights => {
-                this.store.dispatch(new FlightsLoadedAction(flights));
-            },
-            err => {
-                console.error('error loading flights', err);
-            }
-        )
+        return this.http.get<Flight[]>(url, { params, headers });
          
     }
 

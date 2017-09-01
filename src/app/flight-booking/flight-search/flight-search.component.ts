@@ -1,4 +1,4 @@
-import { FlightUpdatedAction } from '../../model/flights/flights.actions';
+import { FlightsLoadAction, FlightUpdatedAction } from '../../model/flights/flights.actions';
 import { AppState } from '../../model/app.state';
 import { Store } from '@ngrx/store';
 import { FlightsStatistics } from '../../model/flights/flights.state';
@@ -15,8 +15,7 @@ import { FlightService } from "app/flight-booking/flight.service";
 @Component({
   selector: 'flight-search',
   templateUrl: './flight-search.component.html',
-  styleUrls: ['./flight-search.component.css'],
-  providers: [FlightService]
+  styleUrls: ['./flight-search.component.css']
 })
 export class FlightSearchComponent implements OnInit {
 
@@ -62,9 +61,8 @@ export class FlightSearchComponent implements OnInit {
   search(): void {
     if (!this.from || !this.to) return;
 
-      let observable = 
-        this.flightService.search(this.from, this.to);
-   
+    this.store.dispatch(new FlightsLoadAction({from: this.from, to: this.to}));
+
   }
 
   select(f: Flight, selected: boolean): void {

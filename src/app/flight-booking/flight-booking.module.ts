@@ -26,7 +26,7 @@ import { FlightCardComponent } from './flight-card/flight-card.component';
     FlightLookaheadComponent,
 ],
   providers:[
-    // FlightService
+    FlightService
     // { provide: FlightService, useClass: FlightService }
   ],
   exports: [
