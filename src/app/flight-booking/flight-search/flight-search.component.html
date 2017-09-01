@@ -35,6 +35,11 @@
     [selected]="basket[f.id]"
     (selectedChange)="select(f, $event)">
   </flight-card>
+  <div class="card">
+    {{f.delayed}}
+    <button class="btn btn-default" (click)="changeState(f, true)">Delayed</button>
+    <button class="btn btn-default" (click)="changeState(f, false)">Not Delayed</button>
+  </div>
 </div>
 </div>
 <!--

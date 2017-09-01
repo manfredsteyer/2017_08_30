@@ -1,3 +1,4 @@
+import { FlightUpdatedAction } from '../../model/flights/flights.actions';
 import { AppState } from '../../model/app.state';
 import { Store } from '@ngrx/store';
 import { FlightsStatistics } from '../../model/flights/flights.state';
@@ -69,5 +70,16 @@ export class FlightSearchComponent implements OnInit {
   select(f: Flight, selected: boolean): void {
     this.basket[f.id] = selected;
     this.flightEventService.flightSelected.next(f);
+  }
+
+  changeState(f: Flight, delayed: boolean): void {
+    
+    // f.delayed = delayed; // Mutable!
+
+    let newFlight: Flight = { ...f, delayed };
+    this.store.dispatch(new FlightUpdatedAction(newFlight));
+
+    // newFlight an Store senden!
+
   }
 }
